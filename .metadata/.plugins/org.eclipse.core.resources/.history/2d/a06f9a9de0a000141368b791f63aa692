@@ -40,8 +40,8 @@ public class GenericGameLogic {
 		return currentColor;
 	}
 	
-	// reassigns Tiles with new Color
-	private void changeColor(){
+	// not sure what param type would be best
+	public void changeColor(){
 		for(Tile t: myTiles){
 			t.changeTileColor(currentColor);
 		}

@@ -39,13 +39,6 @@ public class GenericGameLogic {
 	public ColorSet getColorSet(){
 		return currentColor;
 	}
-	
-	// reassigns Tiles with new Color
-	private void changeColor(){
-		for(Tile t: myTiles){
-			t.changeTileColor(currentColor);
-		}
-	}
 
 	public int getScore() {
 		return myScore;
