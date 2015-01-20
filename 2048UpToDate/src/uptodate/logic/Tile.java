@@ -2,11 +2,9 @@ package uptodate.logic;
 
 import java.awt.Color;
 
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
-import uptodate.color.ColorDefault;
-import uptodate.color.ColorSet;
+import uptodate.color.*;
+
 
 public class Tile {
 	private int value;
@@ -34,11 +32,11 @@ public class Tile {
 	}
 
 	public Color getForeground() {
-		return color.getForeground(getValue());
+		return color.getForeground(value);
 	}
 
 	public Color getBackground() {
-		return color.getBackground(getValue());
+		return color.getBackground(value);
 	}
 
 	public int getValue() {
