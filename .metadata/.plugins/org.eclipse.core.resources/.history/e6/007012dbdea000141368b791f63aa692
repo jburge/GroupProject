@@ -1,4 +1,5 @@
-package game2048;
+
+package uptodate.color;
 
 import java.awt.Color;
 

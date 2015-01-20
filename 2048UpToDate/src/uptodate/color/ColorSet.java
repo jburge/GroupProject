@@ -10,5 +10,7 @@ abstract public class ColorSet {
 	public abstract Color getBackground(int value);
 
 	public abstract Color getForeground(int value);
+	
+	public abstract Color getWindowColor();
 
 }

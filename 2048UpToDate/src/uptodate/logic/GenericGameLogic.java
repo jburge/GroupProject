@@ -23,7 +23,7 @@ public class GenericGameLogic {
 	}
 	
 	public GenericGameLogic(int length){
-		currentColor = (ColorSet) new ColorDefault();
+		currentColor = (ColorSet) new ColorAlt1();
 		sideLength = length;
 		resetGame();
 	}
@@ -34,6 +34,10 @@ public class GenericGameLogic {
 
 	public boolean getLose() {
 		return myLose;
+	}
+	
+	public ColorSet getColorSet(){
+		return currentColor;
 	}
 
 	public int getScore() {

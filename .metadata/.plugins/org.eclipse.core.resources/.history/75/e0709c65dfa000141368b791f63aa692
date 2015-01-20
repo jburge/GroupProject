@@ -1,17 +1,17 @@
-package game2048;
+package uptodate.color;
 
 import java.awt.Color;
 
-public class ColorDefault extends ColorSet{
+public class ColorAlt1 {
 
-	public ColorDefault(){}
+public ColorAlt1(){}
 	
 	public  Color getBackground(int value) {
 		switch (value) {
 		case 2:
-			return new Color(0xeee4da);
+			return new Color(0x4c8cb5);
 		case 4:
-			return new Color(0xede0c8);
+			return new Color(196ba0);
 		case 8:
 			return new Color(0xf2b179);
 		case 16:
@@ -36,6 +36,10 @@ public class ColorDefault extends ColorSet{
 	
 	public Color getForeground(int value){
 		return value < 16 ? new Color(0x776e65) : new Color(0xf9f6f2);
+	}
+	
+	public Color getWindowColor(){
+		return new Color(0x99bdd5);
 	}
 
 }

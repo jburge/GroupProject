@@ -1,0 +1,45 @@
+package uptodate.color;
+
+import java.awt.Color;
+
+public class ColorAlt1 {
+
+public ColorAlt1(){}
+	
+	public  Color getBackground(int value) {
+		switch (value) {
+		case 2:
+			return new Color(0x4c8cb5);
+		case 4:
+			return new Color(0x327bab);
+		case 8:
+			return new Color(0x196ba0);
+		case 16:
+			return new Color(0x005b96);
+		case 32:
+			return new Color(0x005b96);
+		case 64:
+			return new Color(0x005187);
+		case 128:
+			return new Color(0x004878);
+		case 256:
+			return new Color(0x003f69);
+		case 512:
+			return new Color(0x00365a);
+		case 1024:
+			return new Color(0x002d4b);
+		case 2048:
+			return new Color(0x00243c);
+		}
+		return new Color(0xcdc1b4);
+	}
+	
+	public Color getForeground(int value){
+		return value < 16 ? new Color(0x00243c) : new Color(0x7fadca);
+	}
+	
+	public Color getWindowColor(){
+		return new Color(0x99bdd5);
+	}
+
+}

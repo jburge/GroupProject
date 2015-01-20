@@ -21,7 +21,7 @@ import uptodate.logic.*;
 
 public class GUI extends JPanel {
 	private static JFrame game;
-	//private static final Color BG_COLOR = new Color(0xbbada0);
+	private static final Color BG_COLOR = new Color(0xbbada0);
 	private static final String FONT_NAME = "Arial";
 	private static final int TILE_SIZE = 64;
 	private static final int TILES_MARGIN = 16;
@@ -56,7 +56,7 @@ public class GUI extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.setColor(gameManager.getColorSet().getWindowColor());
+		g.setColor(BG_COLOR);
 		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
 		for (int y = 0; y < sideInput; y++) {
 			for (int x = 0; x < sideInput; x++) {

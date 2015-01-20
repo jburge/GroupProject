@@ -1,11 +1,10 @@
 package uptodate.color;
 
-
 import java.awt.Color;
 
-public class ColorDefault extends ColorSet{
+public class ColorAlt1 {
 
-	public ColorDefault(){}
+public ColorAlt1(){}
 	
 	public  Color getBackground(int value) {
 		switch (value) {
@@ -38,10 +37,5 @@ public class ColorDefault extends ColorSet{
 	public Color getForeground(int value){
 		return value < 16 ? new Color(0x776e65) : new Color(0xf9f6f2);
 	}
-	
-	public Color getWindowColor(){
-		return new Color(0xbbada0);
-	}
 
 }
-

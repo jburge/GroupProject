@@ -1,4 +1,8 @@
-package game2048;
+package uptodate.gui;
+
+import javax.swing.JPanel;
+
+
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,7 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class Game2048GUI extends JPanel {
+import uptodate.logic.*;
+
+public class GUI extends JPanel {
 	private static JFrame game;
 	private static final Color BG_COLOR = new Color(0xbbada0);
 	private static final String FONT_NAME = "Arial";
@@ -28,7 +34,7 @@ public class Game2048GUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Game2048GUI() {
+	public GUI() {
 		setFocusable(true);
 		gameManager = new GenericGameLogic(sideInput);
 		windowWidth = TILE_SIZE * sideInput + TILES_MARGIN * (sideInput + 1);
@@ -65,7 +71,7 @@ public class Game2048GUI extends JPanel {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
 				RenderingHints.VALUE_STROKE_NORMALIZE);
-		int value = tile.value;
+		int value = tile.getValue();
 		int xOffset = offsetCoors(x);
 		int yOffset = offsetCoors(y);
 		g.setColor(tile.getBackground());
@@ -123,10 +129,11 @@ public class Game2048GUI extends JPanel {
 		game.setSize(340, 400);
 		game.setResizable(false);
 
-		game.add(new Game2048GUI());
+		game.add(new GUI());
 
 		game.setLocationRelativeTo(null);
 		game.setVisible(true);
 	}
 
 }
+

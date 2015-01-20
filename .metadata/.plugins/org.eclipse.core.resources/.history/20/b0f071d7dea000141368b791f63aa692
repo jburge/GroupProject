@@ -1,9 +1,13 @@
-package game2048;
+package uptodate.logic;
+
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import uptodate.color.*;
+
 
 public class GenericGameLogic {
 	private int sideLength;
@@ -19,7 +23,7 @@ public class GenericGameLogic {
 	}
 	
 	public GenericGameLogic(int length){
-		currentColor = new ColorDefault();
+		currentColor = (ColorSet) new ColorDefault();
 		sideLength = length;
 		resetGame();
 	}
@@ -53,7 +57,7 @@ public class GenericGameLogic {
 		if (!availableSpace().isEmpty()) {
 			int index = (int) (Math.random() * list.size()) % list.size();
 			Tile emptyTime = list.get(index);
-			emptyTime.value = Math.random() < 0.9 ? 2 : 4;
+			emptyTime.setValue(Math.random() < 0.9 ? 2 : 4);
 		}
 	}
 
@@ -112,8 +116,8 @@ public class GenericGameLogic {
 			for (int y = 0; y < sideLength; y++) {
 				Tile t = tileAt(x, y);
 				//not sure what to do here
-				if ((x < sideLength - 1 && t.value == tileAt(x + 1, y).value)
-						|| ((y < sideLength - 1) && t.value == tileAt(x, y + 1).value)) {
+				if ((x < sideLength - 1 && t.getValue() == tileAt(x + 1, y).getValue())
+						|| ((y < sideLength - 1) && t.getValue() == tileAt(x, y + 1).getValue())) {
 					return true;
 				}
 			}
@@ -209,7 +213,7 @@ public class GenericGameLogic {
 		}
 
 		for (int i = 0; i < line1.length; i++) {
-			if (line1[i].value != line2[i].value) {
+			if (line1[i].getValue() != line2[i].getValue()) {
 				return false;
 			}
 		}
@@ -237,8 +241,8 @@ public class GenericGameLogic {
 	private Tile[] mergeLine(Tile[] oldLine) {
 		LinkedList<Tile> list = new LinkedList<Tile>();
 		for (int i = 0; i < sideLength && !oldLine[i].isEmpty(); i++) {
-			int num = oldLine[i].value;
-			if (i < sideLength - 1 && oldLine[i].value == oldLine[i + 1].value) {
+			int num = oldLine[i].getValue();
+			if (i < sideLength - 1 && oldLine[i].getValue() == oldLine[i + 1].getValue()) {
 				num *= 2;
 				myScore += num;
 				int ourTarget = 2048;
