@@ -76,7 +76,7 @@ public class Game2048GUI extends JPanel {
 			g.drawString(s, xOffset + (TILE_SIZE - w) / 2, yOffset + TILE_SIZE
 					- (TILE_SIZE - h) / 2 - 2);
 
-		// wtf is giong on with these ifs
+		// changed if statement for clarity
 		if (gameManager.getWin() || gameManager.getLose()) {
 			g.setColor(new Color(255, 255, 255, 30));
 			g.fillRect(0, 0, getWidth(), getHeight());

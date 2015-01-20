@@ -190,7 +190,7 @@ public class GameLogic {
 	private void setLine(int index, Tile[] re) {
 		System.arraycopy(re, 0, myTiles, index * 4, 4);
 	}
-
+	//confused about this line
 	private boolean compare(Tile[] line1, Tile[] line2) {
 		if (line1 == line2) {
 			return true;
