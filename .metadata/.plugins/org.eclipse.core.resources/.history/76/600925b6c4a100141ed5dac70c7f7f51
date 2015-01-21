@@ -115,7 +115,7 @@ public class GUI extends JPanel {
 		int sizeHeight = colorHeight + heightUnit * 2;
 		int timeHeight = sizeHeight + heightUnit * 2;
 		int startHeight = timeHeight + heightUnit * 2;
-		int resumeHeight = startHeight + heightUnit * 5 / 2;
+		int resumeHeight = startHeight + heightUnit * 3;
 		
 		int buffer = menuHeight / 24;
 		int fieldSize = heightUnit * 2 - buffer * 2;
@@ -200,7 +200,7 @@ public class GUI extends JPanel {
 				repaint();
 			}
 		});
-		btnStartNewGame.setBounds(menuWidth / 6, startHeight, menuWidth / 6 * 4, heightUnit * 2);
+		btnStartNewGame.setBounds(menuWidth / 6, startHeight, menuWidth / 6 * 4, heightUnit * 3);
 		panelMenu.add(btnStartNewGame);
 		
 		JButton btnResume = new JButton("Resume");

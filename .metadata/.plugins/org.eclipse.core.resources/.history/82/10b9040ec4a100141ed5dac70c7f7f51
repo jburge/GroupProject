@@ -103,19 +103,18 @@ public class GUI extends JPanel {
 	}
 	
 	private void createMenuPanel(){
-		int menuWidthBuffer = windowWidth / 9;
-		int menuHeightBuffer = windowHeight / 9;
+		int menuWidthBuffer = windowWidth / 8;
+		int menuHeightBuffer = windowHeight / 8;
 		int menuWidth = windowWidth - menuWidthBuffer * 2;
 		int menuHeight = windowHeight - menuHeightBuffer * 2;
 		
 		
+		int heightBuffer = 15;
 		int heightUnit = menuHeight / 12;
 		
-		int colorHeight = heightUnit * 2;
+		int colorHeight = heightBuffer + heightUnit * 2;
 		int sizeHeight = colorHeight + heightUnit * 2;
 		int timeHeight = sizeHeight + heightUnit * 2;
-		int startHeight = timeHeight + heightUnit * 2;
-		int resumeHeight = startHeight + heightUnit * 5 / 2;
 		
 		int buffer = menuHeight / 24;
 		int fieldSize = heightUnit * 2 - buffer * 2;
@@ -133,25 +132,6 @@ public class GUI extends JPanel {
 		JLabel lblColorway = new JLabel("Color Way:");
 		lblColorway.setBounds(40, colorHeight, menuWidth / 2 - 50, fieldSize);
 		panelMenu.add(lblColorway);
-		
-		final JComboBox comboColorInput = new JComboBox();
-		comboColorInput.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switch(comboColorInput.getSelectedItem().toString()){
-				case "Default":
-					newColor = new ColorDefault();
-					break;
-				case "Blue":
-					newColor = new ColorAlt1();
-					break;
-				
-				}
-			}
-		});
-		comboColorInput.addItem("Default");
-		comboColorInput.addItem("Blue");
-		comboColorInput.setBounds(menuWidth / 2 + 10, colorHeight, menuWidth / 2 - 30, fieldSize);
-		panelMenu.add(comboColorInput);
 		
 		JLabel lblBoardSize = new JLabel("Board Size:");
 		lblBoardSize.setBounds(40, sizeHeight, menuWidth / 2 - 50, fieldSize);
@@ -179,6 +159,26 @@ public class GUI extends JPanel {
 		comboSizeInput.setSelectedItem("4");
 		comboSizeInput.setBounds(menuWidth / 2 + 10, sizeHeight, menuWidth / 2 - 30, fieldSize);
 		panelMenu.add(comboSizeInput);
+
+		
+		final JComboBox comboColorInput = new JComboBox();
+		comboColorInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switch(comboColorInput.getSelectedItem().toString()){
+				case "Default":
+					newColor = new ColorDefault();
+					break;
+				case "Blue":
+					newColor = new ColorAlt1();
+					break;
+				
+				}
+			}
+		});
+		comboColorInput.addItem("Default");
+		comboColorInput.addItem("Blue");
+		comboColorInput.setBounds(menuWidth / 2 + 10, colorHeight, menuWidth / 2 - 30, fieldSize);
+		panelMenu.add(comboColorInput);
 		
 		JLabel lblTimeLimit = new JLabel("Time Limit:");
 		lblTimeLimit.setBounds(40, timeHeight, menuWidth / 2 - 30, 25);
@@ -200,7 +200,7 @@ public class GUI extends JPanel {
 				repaint();
 			}
 		});
-		btnStartNewGame.setBounds(menuWidth / 6, startHeight, menuWidth / 6 * 4, heightUnit * 2);
+		btnStartNewGame.setBounds(menuWidth / 6, menuHeight - 90, menuWidth / 6 * 4, fieldSize * 2);
 		panelMenu.add(btnStartNewGame);
 		
 		JButton btnResume = new JButton("Resume");
@@ -210,7 +210,7 @@ public class GUI extends JPanel {
 				gameManager.resumeGame();
 			}
 		});
-		btnResume.setBounds(menuWidth / 4, resumeHeight, menuWidth / 2 , fieldSize);
+		btnResume.setBounds(menuWidth / 4, menuHeight - 40, menuWidth / 2 , fieldSize);
 		panelMenu.add(btnResume);
 		
 		panelMenu.setVisible(false);
