@@ -57,7 +57,7 @@ public class GUI extends JPanel {
 	
 	private int newSides;
 	private int newTime;
-	private ColorSet gameColor = new ColorDefault();
+	private ColorSet newColor = new ColorDefault();
 	
 
 	/**
@@ -185,10 +185,10 @@ public class GUI extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				switch(comboColorInput.getSelectedItem().toString()){
 				case "Default":
-					gameColor = new ColorDefault();
+					newColor = new ColorDefault();
 					break;
 				case "Blue":
-					gameColor = new ColorAlt1();
+					newColor = new ColorAlt1();
 					break;
 				
 				}
@@ -234,7 +234,7 @@ public class GUI extends JPanel {
 		btnStartNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeMenu();
-				gameManager.newGame(newSides, newTime, gameColor);
+				gameManager.newGame(newSides, newTime, newColor);
 				currentSides = newSides;
 				currentTime = newTime;
 				resizeWindow();

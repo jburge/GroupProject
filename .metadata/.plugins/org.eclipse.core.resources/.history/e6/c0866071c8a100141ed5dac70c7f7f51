@@ -74,7 +74,7 @@ public class GUI extends JPanel {
 		createMenuPanel();
 		
 		
-		gameManager = new GenericGameLogic(currentSides);
+		gameManager = new GenericGameLogic(currentSides, gameColor);
 		
 		addKeyListener(new KeyAdapter() {
 			@Override

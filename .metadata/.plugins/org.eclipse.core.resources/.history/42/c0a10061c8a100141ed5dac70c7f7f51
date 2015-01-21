@@ -24,13 +24,7 @@ public class GenericGameLogic {
 	}
 	
 	public GenericGameLogic(int length){
-		currentColor = (ColorSet) new ColorDefault();
-		sideLength = length;
-		resetGame();
-	}
-	
-	public GenericGameLogic(int length, ColorSet color){
-		currentColor = color;
+		currentColor = (ColorSet) new ColorAlt1();
 		sideLength = length;
 		resetGame();
 	}
