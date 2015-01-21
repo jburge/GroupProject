@@ -16,6 +16,7 @@ public class GenericGameLogic {
 
 	boolean myWin = false;
 	boolean myLose = false;
+	boolean pause = false;
 	int myScore = 0;
 
 	public GenericGameLogic() {
@@ -51,6 +52,18 @@ public class GenericGameLogic {
 		return myScore;
 	}
 
+	public void pauseGame(){
+		pause = true;
+	}
+	
+	public void resumeGame(){
+		pause = false;
+	}
+	
+	public boolean isPaused(){
+		return pause;
+	}
+	
 	public void resetGame() {
 		myScore = 0;
 		myWin = false;
