@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -21,7 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import uptodate.color.*;
+import uptodate.color.ColorSet;
 import uptodate.logic.*;
 
 import javax.swing.JLabel;
@@ -48,7 +47,7 @@ public class GUI extends JPanel {
 	
 	private int newSides;
 	private int newTime;
-	private ColorSet newColor = new ColorDefault();
+	private ColorSet newColor;
 	
 
 	/**
@@ -148,22 +147,8 @@ public class GUI extends JPanel {
 		panelMenu.add(comboSizeInput);
 
 		
-		final JComboBox comboColorInput = new JComboBox();
-		comboColorInput.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switch(comboColorInput.getSelectedItem().toString()){
-				case "Default":
-					newColor = new ColorDefault();
-					break;
-				case "Blue":
-					newColor = new ColorAlt1();
-					break;
-				
-				}
-			}
-		});
+		JComboBox comboColorInput = new JComboBox();
 		comboColorInput.addItem("Default");
-		comboColorInput.addItem("Blue");
 		comboColorInput.setBounds(menuWidth / 2 + 10, 40, menuWidth / 2 - 30, 25);
 		panelMenu.add(comboColorInput);
 		
@@ -183,7 +168,6 @@ public class GUI extends JPanel {
 				gameManager.newGame(newSides, newTime, newColor);
 				currentSides = newSides;
 				currentTime = newTime;
-				resizeWindow();
 				repaint();
 			}
 		});
@@ -213,13 +197,6 @@ public class GUI extends JPanel {
 		panelMenu.setVisible(false);
 	}
 
-	private void resizeWindow(){
-		windowWidth = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 1);
-		windowHeight = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 5);
-		
-		game.setSize( windowWidth, windowHeight);
-	}
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -47,12 +47,6 @@ public class GenericGameLogic {
 			t.changeTileColor(currentColor);
 		}
 	}
-	
-	public void newGame(int length, int time, ColorSet color){
-		sideLength = length;
-		currentColor = color;
-		resetGame();
-	}
 
 	public int getScore() {
 		return myScore;
@@ -70,7 +64,7 @@ public class GenericGameLogic {
 		return pause;
 	}
 	
-	private void resetGame() {
+	public void resetGame() {
 		myScore = 0;
 		myWin = false;
 		myLose = false;

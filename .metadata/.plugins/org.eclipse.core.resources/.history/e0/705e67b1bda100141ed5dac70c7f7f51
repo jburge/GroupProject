@@ -6,8 +6,6 @@ import javax.swing.JPanel;
 
 
 
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -21,15 +19,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import uptodate.color.*;
 import uptodate.logic.*;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -41,14 +36,8 @@ public class GUI extends JPanel {
 	private int windowHeight;
 	
 	private GenericGameLogic gameManager;
-	private int defaultSideInput = 4;
-	
-	private int currentSides;
-	private int currentTime;
-	
-	private int newSides;
-	private int newTime;
-	private ColorSet newColor = new ColorDefault();
+	private int sideInput = 4;
+	private JTextField textSizeInput;
 	
 
 	/**
@@ -57,15 +46,13 @@ public class GUI extends JPanel {
 	public GUI() {
 		setFocusable(true);
 		setLayout(null);
-		currentSides = defaultSideInput;
-		
-		windowWidth = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 1);
-		windowHeight = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 5);
+		windowWidth = GraphicsManager.TILE_SIZE * sideInput + GraphicsManager.TILES_MARGIN * (sideInput + 1);
+		windowHeight = GraphicsManager.TILE_SIZE * sideInput + GraphicsManager.TILES_MARGIN * (sideInput + 5);
 		
 		createMenuPanel();
 		
 		
-		gameManager = new GenericGameLogic(currentSides);
+		gameManager = new GenericGameLogic(sideInput);
 		
 		addKeyListener(new KeyAdapter() {
 			@Override
@@ -124,46 +111,13 @@ public class GUI extends JPanel {
 		lblBoardSize.setBounds(40, 76, menuWidth / 2 - 50, 24);
 		panelMenu.add(lblBoardSize);
 		
-		final JComboBox comboSizeInput = new JComboBox();
-		comboSizeInput.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switch(comboSizeInput.getSelectedItem().toString()){
-				case "3":
-					newSides = 3;
-					break;
-				case "4":
-					newSides = 4;
-					break;
-				case "5":
-					newSides = 5;
-					break;
-				}
-			}
-		});
-		comboSizeInput.addItem("3");
-		comboSizeInput.addItem("4");
-		comboSizeInput.addItem("5");
-		comboSizeInput.setSelectedItem("4");
-		comboSizeInput.setBounds(menuWidth / 2 + 10, 78, menuWidth / 2 - 30, 25);
-		panelMenu.add(comboSizeInput);
-
+		textSizeInput = new JTextField();
+		textSizeInput.setBounds(menuWidth / 2 + 10, 78, menuWidth / 2 - 30, 25);
+		panelMenu.add(textSizeInput);
+		textSizeInput.setColumns(10);
 		
-		final JComboBox comboColorInput = new JComboBox();
-		comboColorInput.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switch(comboColorInput.getSelectedItem().toString()){
-				case "Default":
-					newColor = new ColorDefault();
-					break;
-				case "Blue":
-					newColor = new ColorAlt1();
-					break;
-				
-				}
-			}
-		});
+		JComboBox comboColorInput = new JComboBox();
 		comboColorInput.addItem("Default");
-		comboColorInput.addItem("Blue");
 		comboColorInput.setBounds(menuWidth / 2 + 10, 40, menuWidth / 2 - 30, 25);
 		panelMenu.add(comboColorInput);
 		
@@ -172,7 +126,6 @@ public class GUI extends JPanel {
 		panelMenu.add(lblTimeLimit);
 		
 		JComboBox comboTimeInput = new JComboBox();
-		comboTimeInput.addItem("No Limit");
 		comboTimeInput.setBounds(menuWidth / 2 + 10, 122, menuWidth / 2 - 30, 25);
 		panelMenu.add(comboTimeInput);
 		
@@ -180,10 +133,7 @@ public class GUI extends JPanel {
 		btnStartNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeMenu();
-				gameManager.newGame(newSides, newTime, newColor);
-				currentSides = newSides;
-				currentTime = newTime;
-				resizeWindow();
+				gameManager.resetGame();
 				repaint();
 			}
 		});
@@ -213,13 +163,6 @@ public class GUI extends JPanel {
 		panelMenu.setVisible(false);
 	}
 
-	private void resizeWindow(){
-		windowWidth = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 1);
-		windowHeight = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 5);
-		
-		game.setSize( windowWidth, windowHeight);
-	}
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -230,9 +173,9 @@ public class GUI extends JPanel {
 		
 		Graphics2D g2 = GraphicsManager.initializeGraphics(g);
 		
-		for (int y = 0; y < currentSides; y++) {
-			for (int x = 0; x < currentSides; x++) {
-				drawTile(g2, gameManager.getTile(x + y * currentSides), x, y);
+		for (int y = 0; y < sideInput; y++) {
+			for (int x = 0; x < sideInput; x++) {
+				drawTile(g2, gameManager.getTile(x + y * sideInput), x, y);
 			}
 		}
 		GraphicsManager.printScore(g2, gameManager.getScore(), windowWidth, windowHeight);

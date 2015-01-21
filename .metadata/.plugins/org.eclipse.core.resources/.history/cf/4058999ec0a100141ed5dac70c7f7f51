@@ -183,7 +183,6 @@ public class GUI extends JPanel {
 				gameManager.newGame(newSides, newTime, newColor);
 				currentSides = newSides;
 				currentTime = newTime;
-				resizeWindow();
 				repaint();
 			}
 		});
@@ -213,13 +212,6 @@ public class GUI extends JPanel {
 		panelMenu.setVisible(false);
 	}
 
-	private void resizeWindow(){
-		windowWidth = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 1);
-		windowHeight = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 5);
-		
-		game.setSize( windowWidth, windowHeight);
-	}
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
