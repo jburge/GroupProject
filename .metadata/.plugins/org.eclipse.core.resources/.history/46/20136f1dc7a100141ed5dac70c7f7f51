@@ -128,7 +128,7 @@ public class GUI extends JPanel {
 		int startHeight = timeHeight + heightUnit * 2;
 		int resumeHeight = startHeight + heightUnit * 3 - buffer;
 		
-		int txtWidth = menuWidth;
+		int txtWidth = 3 / 10 * menuWidth;
 		
 		panelMenu.setBounds(menuWidthBuffer, menuHeightBuffer -25, menuWidth, menuHeight);
 
@@ -170,14 +170,17 @@ public class GUI extends JPanel {
 	
 		
 		panelMenu = new JPanel();
+		panelMenu.setBounds(menuWidthBuffer, menuHeightBuffer -25, menuWidth, menuHeight);
 		add(panelMenu);
 		panelMenu.setLayout(null);
 		
 		lblMenu = new JLabel("Menu");
 		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMenu.setBounds(0, 0, menuWidth, heightUnit * 2);
 		panelMenu.add(lblMenu);
 		
 		lblColorway = new JLabel("Color Way:");
+		lblColorway.setBounds(40, colorHeight, menuWidth / 2 - 50, fieldSize);
 		panelMenu.add(lblColorway);
 		
 		comboColorInput = new JComboBox();
@@ -196,9 +199,11 @@ public class GUI extends JPanel {
 		});
 		comboColorInput.addItem("Default");
 		comboColorInput.addItem("Blue");
+		comboColorInput.setBounds(menuWidth / 2 + 10, colorHeight, menuWidth / 2 - 30, fieldSize);
 		panelMenu.add(comboColorInput);
 		
 		lblBoardSize = new JLabel("Board Size:");
+		lblBoardSize.setBounds(40, sizeHeight, menuWidth / 2 - 50, fieldSize);
 		panelMenu.add(lblBoardSize);
 		
 		comboSizeInput = new JComboBox();
@@ -221,13 +226,16 @@ public class GUI extends JPanel {
 		comboSizeInput.addItem("4");
 		comboSizeInput.addItem("5");
 		comboSizeInput.setSelectedItem("4");
+		comboSizeInput.setBounds(menuWidth / 2 + 10, sizeHeight, menuWidth / 2 - 30, fieldSize);
 		panelMenu.add(comboSizeInput);
 		
 		lblTimeLimit = new JLabel("Time Limit:");
+		lblTimeLimit.setBounds(40, timeHeight, menuWidth / 2 - 30, 25);
 		panelMenu.add(lblTimeLimit);
 		
 		comboTimeInput = new JComboBox();
 		comboTimeInput.addItem("No Limit");
+		comboTimeInput.setBounds(menuWidth / 2 + 10, timeHeight, menuWidth / 2 - 30, fieldSize);
 		panelMenu.add(comboTimeInput);
 		
 		btnStartNewGame = new JButton("Start New Game");
@@ -242,6 +250,7 @@ public class GUI extends JPanel {
 				repaint();
 			}
 		});
+		btnStartNewGame.setBounds(menuWidth / 6, startHeight, menuWidth / 6 * 4, heightUnit * 3 - buffer * 2);
 		panelMenu.add(btnStartNewGame);
 		
 		btnResume = new JButton("Resume");
@@ -251,6 +260,7 @@ public class GUI extends JPanel {
 				gameManager.resumeGame();
 			}
 		});
+		btnResume.setBounds(menuWidth / 4, resumeHeight, menuWidth / 2 , fieldSize);
 		panelMenu.add(btnResume);
 		
 		resizeMenu();
