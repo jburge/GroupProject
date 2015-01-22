@@ -2,20 +2,20 @@ package uptodate.color;
 
 import java.awt.Color;
 
-public class ColorAlt1 extends ColorSet{
+public class ColorAlt2 extends ColorSet{
 
-	public ColorAlt1(){}
+	public ColorAlt2(){}
 	
 	public  Color getBackground(int value) {
 		switch (value) {
 		case 2:
-			return new Color(0x4c8cb5);
+			return new Color(0x8C51A6);
 		case 4:
-			return new Color(0x327bab);
+			return new Color(0x573368);
 		case 8:
-			return new Color(0x196ba0);
+			return new Color(0x1099A3);
 		case 16:
-			return new Color(0x005b96);
+			return new Color(0x042D30);
 		case 32:
 			return new Color(0x005b96);
 		case 64:
@@ -35,11 +35,12 @@ public class ColorAlt1 extends ColorSet{
 	}
 	
 	public Color getForeground(int value){
-		return value < 16 ? new Color(0x00243c) : new Color(0x7fadca);
+		return value < 16 ? new Color(0x9DD6EC) : new Color(0x180630);
 	}
 	
 	public Color getWindowColor(){
-		return new Color(0x99bdd5);
+		return new Color(0xE3E3C6);
 	}
+
 
 }

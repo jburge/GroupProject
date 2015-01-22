@@ -24,7 +24,7 @@ public class GenericGameLogic {
 	}
 	
 	public GenericGameLogic(int length){
-		currentColor = (ColorSet) new ColorDefault();
+		currentColor = (ColorSet) new ColorAlt2();
 		sideLength = length;
 		resetGame();
 	}
