@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -35,7 +36,10 @@ import java.awt.event.ActionEvent;
 
 public class GUI extends JPanel {
 	private static JFrame game;
-	private JPanel panelMenu;
+	
+	private JPanel panelPost;
+	
+/*	private JPanel panelMenu;
 	private JLabel lblMenu;
 	private JLabel lblColorway;
 	private JLabel lblBoardSize;
@@ -44,13 +48,17 @@ public class GUI extends JPanel {
 	private JComboBox comboSizeInput;
 	private JComboBox comboTimeInput;
 	private JButton btnStartNewGame;
-	private JButton btnResume; 
+	private JButton btnResume; */
+	
+	private MenuPanel gameMenu;
 
 	private int windowWidth;
 	private int windowHeight;
 	
 	private GenericGameLogic gameManager;
 	private int defaultSideInput = 4;
+	private boolean gameOver;
+	private String username;
 	
 	private int currentSides;
 	private int currentTime;
@@ -71,8 +79,11 @@ public class GUI extends JPanel {
 		windowWidth = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 1);
 		windowHeight = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 5);
 		
-		createMenuPanel();
+		gameMenu = new MenuPanel(windowWidth, windowHeight);
+		createMenuFunctions();
+		add(gameMenu);
 		
+		createPostGamePanel();
 		
 		gameManager = new GenericGameLogic(currentSides);
 		
@@ -81,7 +92,11 @@ public class GUI extends JPanel {
 			public void keyPressed(KeyEvent e) {
 				// game logic state function
 				detectInput(e);
-				gameManager.checkState(e);
+				gameOver = gameManager.checkState(e);
+				if(gameOver){
+					//postGameScreen();
+					//gameManager.saveGame(username);
+				}
 				repaint();
 				
 			}
@@ -90,8 +105,57 @@ public class GUI extends JPanel {
 		
 		//RESIZE WINDOW FOR LENGTH
 		game.setSize( windowWidth, windowHeight);
+	}
+	
+	private void createMenuFunctions(){
+		gameMenu.comboColorInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switch(gameMenu.comboColorInput.getSelectedItem().toString()){
+				case "Default":
+					gameColor = new ColorDefault();
+					break;
+				case "Blue":
+					gameColor = new ColorAlt1();
+					break;
+				}
+				gameManager.changeColor(gameColor);
+			}
+		});
 		
+		gameMenu.comboSizeInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				switch(gameMenu.comboSizeInput.getSelectedItem().toString()){
+				case "3":
+					newSides = 3;
+					break;
+				case "4":
+					newSides = 4;
+					break;
+				case "5":
+					newSides = 5;
+					break;
+				}
+			}
+		});
 		
+		gameMenu.btnStartNewGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				removeMenu();
+				gameManager.newGame(newSides, newTime, gameColor);
+				currentSides = newSides;
+				currentTime = newTime;
+				resizeWindow();
+				gameMenu.resetBounds(windowWidth, windowHeight);
+				repaint();
+			}
+		});
+		
+		gameMenu.btnResume.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				removeMenu();
+				repaint();
+			}
+		});
 	}
 	
 	private void detectInput(KeyEvent e){
@@ -111,7 +175,27 @@ public class GUI extends JPanel {
 		}
 	}
 	
-	private void resizeMenu(){
+	private void createPostGamePanel(){
+		int menuWidthBuffer = windowWidth / 9;
+		int menuHeightBuffer = windowHeight / 9;
+		int menuWidth = windowWidth - menuWidthBuffer * 2;
+		int menuHeight = windowHeight - menuHeightBuffer * 2;
+		
+		panelPost = new JPanel();
+		add(panelPost);
+		
+		
+		panelPost.setBounds(menuWidthBuffer, menuHeightBuffer -25, menuWidth, menuHeight);
+		panelPost.setLayout(null);
+		
+		JLabel lblScore = new JLabel("Score: " );
+		lblScore.setBounds(0, 0, 46, 14);
+		panelPost.add(lblScore);
+
+		panelPost.setVisible(false);
+	}
+	
+/*	private void resizeMenu(){
 		int menuWidthBuffer = windowWidth / 9;
 		int menuHeightBuffer = windowHeight / 9;
 		int menuWidth = windowWidth - menuWidthBuffer * 2;
@@ -151,24 +235,6 @@ public class GUI extends JPanel {
 	}
 	
 	private void createMenuPanel(){
-		int menuWidthBuffer = windowWidth / 9;
-		int menuHeightBuffer = windowHeight / 9;
-		int menuWidth = windowWidth - menuWidthBuffer * 2;
-		int menuHeight = windowHeight - menuHeightBuffer * 2;
-		
-		
-		int heightUnit = menuHeight / 12;
-		int buffer = menuHeight / 24;
-		int fieldSize = heightUnit * 2 - buffer * 2;
-		
-		int colorHeight = heightUnit * 2;
-		int sizeHeight = colorHeight + heightUnit * 2;
-		int timeHeight = sizeHeight + heightUnit * 2;
-		int startHeight = timeHeight + heightUnit * 2;
-		int resumeHeight = startHeight + heightUnit * 3 - buffer;
-		
-	
-		
 		panelMenu = new JPanel();
 		add(panelMenu);
 		panelMenu.setLayout(null);
@@ -253,18 +319,25 @@ public class GUI extends JPanel {
 		});
 		panelMenu.add(btnResume);
 		
+		JLabel lblGameOver = new JLabel("Game Over!");
+		lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGameOver.setBounds(83, 11, 101, 30);
+		panelMenu.add(lblGameOver);
+		
 		resizeMenu();
 		panelMenu.setVisible(false);
-	}
+	}*/
 	
 	private void displayMenu(){
 		gameManager.pauseGame();
-		panelMenu.setVisible(true);
+		
+		gameMenu.makeVisible();
 	}
 	
 	private void removeMenu(){
 		gameManager.resumeGame();
-		panelMenu.setVisible(false);
+		
+		gameMenu.makeInvisible();
 	}
 
 	private void resizeWindow(){
@@ -291,7 +364,7 @@ public class GUI extends JPanel {
 		}
 		GraphicsManager.printScore(g2, gameManager.getScore(), windowWidth, windowHeight);
 		
-		GraphicsManager.checkGameStatus(g2, gameManager.getWin(), gameManager.getLose(), windowWidth, windowHeight);
+		GraphicsManager.checkGameStatus(g2, gameOver, gameManager.getWin(), windowWidth, windowHeight);
 	}
 
 	//couldn't figure out how to move this to the graphics manager because of the get font metrics line

@@ -32,8 +32,8 @@ public class GraphicsManager {
 		g.drawString("Score: " + score, (windowWidth / 2) + 30, windowHeight - 35);
 	}
 	
-	public static void checkGameStatus(Graphics2D g, boolean win, boolean lose, int windowWidth, int windowHeight){
-		if (win || lose) {
+	public static void checkGameStatus(Graphics2D g, boolean gameEnd, boolean win, int windowWidth, int windowHeight){
+		if (gameEnd) {
 			g.setColor(new Color(255, 255, 255, 30));
 			g.fillRect(0, 0, windowWidth, windowHeight);
 			g.setColor(new Color(78, 139, 202));
@@ -41,7 +41,7 @@ public class GraphicsManager {
 			if (win) {
 				g.drawString("You won!", windowWidth / 2 - 102, windowHeight / 2 - 50);
 			}
-			else if (lose) {
+			else {
 				g.drawString("Game over!", windowWidth / 2 - 120, windowHeight / 2 - 100);
 				g.drawString("You lose!", windowWidth / 2 - 106, windowHeight / 2 - 50);
 			}
