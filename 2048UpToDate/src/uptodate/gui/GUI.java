@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -24,6 +25,7 @@ import javax.swing.WindowConstants;
 
 import uptodate.color.*;
 import uptodate.logic.*;
+import uptodate.popups.MenuPanel;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -57,13 +59,13 @@ public class GUI extends JPanel {
 	
 	private GenericGameLogic gameManager;
 	private int defaultSideInput = 4;
-	private boolean gameOver;
+	private boolean gameOver = false;
 	private String username;
 	
 	private int currentSides;
 	private int currentTime;
 	
-	private int newSides;
+	private int newSides = 4;
 	private int newTime;
 	private ColorSet gameColor = new ColorDefault();
 	
@@ -95,7 +97,8 @@ public class GUI extends JPanel {
 				gameOver = gameManager.checkState(e);
 				if(gameOver){
 					//postGameScreen();
-					//gameManager.saveGame(username);
+					gameManager.saveGame("temp");
+					gameManager.newGame(currentSides, currentTime, gameColor);
 				}
 				repaint();
 				
@@ -141,6 +144,7 @@ public class GUI extends JPanel {
 		gameMenu.btnStartNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeMenu();
+				gameManager.saveGame("temp");
 				gameManager.newGame(newSides, newTime, gameColor);
 				currentSides = newSides;
 				currentTime = newTime;
@@ -194,139 +198,6 @@ public class GUI extends JPanel {
 
 		panelPost.setVisible(false);
 	}
-	
-/*	private void resizeMenu(){
-		int menuWidthBuffer = windowWidth / 9;
-		int menuHeightBuffer = windowHeight / 9;
-		int menuWidth = windowWidth - menuWidthBuffer * 2;
-		int menuHeight = windowHeight - menuHeightBuffer * 2;
-		
-		
-		int heightUnit = menuHeight / 12;
-		int buffer = menuHeight / 24;
-		int fieldSize = heightUnit * 2 - buffer * 2;
-		
-		int colorHeight = heightUnit * 2;
-		int sizeHeight = colorHeight + heightUnit * 2;
-		int timeHeight = sizeHeight + heightUnit * 2;
-		int startHeight = timeHeight + heightUnit * 2;
-		int resumeHeight = startHeight + heightUnit * 3 - buffer;
-		
-		int txtWidth = menuWidth;
-		
-		panelMenu.setBounds(menuWidthBuffer, menuHeightBuffer -25, menuWidth, menuHeight);
-
-		lblMenu.setBounds(0, 0, menuWidth, heightUnit * 2);
-		
-		lblColorway.setBounds(40, colorHeight, txtWidth, fieldSize);
-		comboColorInput.setBounds(menuWidth / 2 + 10, colorHeight, menuWidth / 2 - 30, fieldSize);
-
-		lblBoardSize.setBounds(40, sizeHeight, txtWidth, fieldSize);
-		comboSizeInput.setBounds(menuWidth / 2 + 10, sizeHeight, menuWidth / 2 - 30, fieldSize);
-
-		lblTimeLimit.setBounds(40, timeHeight,txtWidth, 25);
-		comboTimeInput.setBounds(menuWidth / 2 + 10, timeHeight, menuWidth / 2 - 30, fieldSize);
-		
-		btnStartNewGame.setBounds(menuWidth / 6, startHeight, menuWidth / 6 * 4, heightUnit * 3 - buffer * 2);
-		btnResume.setBounds(menuWidth / 4, resumeHeight, menuWidth / 2 , fieldSize);
-
-
-		
-	}
-	
-	private void createMenuPanel(){
-		panelMenu = new JPanel();
-		add(panelMenu);
-		panelMenu.setLayout(null);
-		
-		lblMenu = new JLabel("Menu");
-		lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
-		panelMenu.add(lblMenu);
-		
-		lblColorway = new JLabel("Color Way:");
-		panelMenu.add(lblColorway);
-		
-		comboColorInput = new JComboBox();
-		comboColorInput.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switch(comboColorInput.getSelectedItem().toString()){
-				case "Default":
-					gameColor = new ColorDefault();
-					break;
-				case "Blue":
-					gameColor = new ColorAlt1();
-					break;
-				
-				}
-			}
-		});
-		comboColorInput.addItem("Default");
-		comboColorInput.addItem("Blue");
-		panelMenu.add(comboColorInput);
-		
-		lblBoardSize = new JLabel("Board Size:");
-		panelMenu.add(lblBoardSize);
-		
-		comboSizeInput = new JComboBox();
-		comboSizeInput.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				switch(comboSizeInput.getSelectedItem().toString()){
-				case "3":
-					newSides = 3;
-					break;
-				case "4":
-					newSides = 4;
-					break;
-				case "5":
-					newSides = 5;
-					break;
-				}
-			}
-		});
-		comboSizeInput.addItem("3");
-		comboSizeInput.addItem("4");
-		comboSizeInput.addItem("5");
-		comboSizeInput.setSelectedItem("4");
-		panelMenu.add(comboSizeInput);
-		
-		lblTimeLimit = new JLabel("Time Limit:");
-		panelMenu.add(lblTimeLimit);
-		
-		comboTimeInput = new JComboBox();
-		comboTimeInput.addItem("No Limit");
-		panelMenu.add(comboTimeInput);
-		
-		btnStartNewGame = new JButton("Start New Game");
-		btnStartNewGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				removeMenu();
-				gameManager.newGame(newSides, newTime, gameColor);
-				currentSides = newSides;
-				currentTime = newTime;
-				resizeWindow();
-				resizeMenu();
-				repaint();
-			}
-		});
-		panelMenu.add(btnStartNewGame);
-		
-		btnResume = new JButton("Resume");
-		btnResume.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				panelMenu.setVisible(false);
-				gameManager.resumeGame();
-			}
-		});
-		panelMenu.add(btnResume);
-		
-		JLabel lblGameOver = new JLabel("Game Over!");
-		lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGameOver.setBounds(83, 11, 101, 30);
-		panelMenu.add(lblGameOver);
-		
-		resizeMenu();
-		panelMenu.setVisible(false);
-	}*/
 	
 	private void displayMenu(){
 		gameManager.pauseGame();

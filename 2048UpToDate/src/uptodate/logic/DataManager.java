@@ -6,14 +6,15 @@ import uptodate.saveload.LoadSaveHelper;
 
 public class DataManager {
 	private ArrayList<SaveEntry> saveList;
+	private String fileName = "C:\\Users\\jburge16\\Documents\\GitHub\\GroupProject\\2048UpToDate\\src\\uptodate\\resources\\data.txt";
 	
 	public DataManager(){
 		saveList = new ArrayList<SaveEntry>();
-		LoadSaveHelper.loadData("uptodate.saveload/data.txt", saveList);
+		LoadSaveHelper.loadData(fileName, saveList);
 	}
 	
 	public void saveData(){
-		LoadSaveHelper.saveData("uptodate.saveload/data.txt", saveList);
+		LoadSaveHelper.saveData(fileName, saveList);
 	}
 	
 	public ArrayList<SaveEntry> getSet(int boardSize, int timeLimit){

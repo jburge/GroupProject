@@ -114,6 +114,7 @@ public class GenericGameLogic {
 	
 	public void saveGame(String username){
 		dataManager.saveGame(new SaveEntry(username, sideLength, highestTile, myScore, timeLimit));
+		dataManager.saveData();
 	}
 
 	// dont know what to pass yet
@@ -143,8 +144,6 @@ public class GenericGameLogic {
 			return true;
 		}
 		return false;
-
-		// resetGame();
 	}
 
 	boolean canMove() {
