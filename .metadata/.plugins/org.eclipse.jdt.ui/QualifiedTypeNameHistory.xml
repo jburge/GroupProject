@@ -7,4 +7,9 @@
 <fullyQualifiedTypeName name="uptodate.logic.SaveEntry"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
+<fullyQualifiedTypeName name="uptodate.popups.NewGamePromptPanel"/>
+<fullyQualifiedTypeName name="uptodate.popups.ViewSelectionPanel"/>
+<fullyQualifiedTypeName name="javax.swing.JComboBox"/>
+<fullyQualifiedTypeName name="javax.swing.JTextArea"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
 </qualifiedTypeNameHistroy>

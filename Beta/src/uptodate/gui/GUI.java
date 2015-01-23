@@ -54,7 +54,7 @@ public class GUI extends JPanel {
 	private int currentTime;
 	
 	private int newSides = 4;
-	private int newTime;
+	private int newTime = 0;
 	private ColorSet gameColor = new ColorDefault();
 	
 
@@ -242,10 +242,12 @@ public class GUI extends JPanel {
 	private void displayResults(){
 		gameResults.setArray(gameManager.getFullDataSet());
 		gameResults.makeVisible();
+		gamePost.makeInvisible();
 	}
 	
 	private void removeResults(){
 		gameResults.makeInvisible();
+		gamePost.makeVisible();
 	}
 
 	private void resizeWindow(){
