@@ -28,7 +28,7 @@ public class GenericGameLogic {
 	
 	public GenericGameLogic(int length){
 		dataManager = new DataManager();
-		currentColor = (ColorSet) new ColorAlt2();
+		currentColor = (ColorSet) new ColorDefault();
 		sideLength = length;
 		resetGame();
 	}
@@ -59,6 +59,10 @@ public class GenericGameLogic {
 		}
 	}
 	
+	public ArrayList<SaveEntry> getFullDataSet(){
+		return dataManager.getSet();
+	}
+	
 	public void newGame(int length, int time, ColorSet color){
 		sideLength = length;
 		currentColor = color;
@@ -83,6 +87,7 @@ public class GenericGameLogic {
 	
 	private void resetGame() {
 		myScore = 0;
+		highestTile = 0;
 		myWin = false;
 		myTiles = new Tile[sideLength * sideLength];
 		for (int i = 0; i < myTiles.length; i++) {

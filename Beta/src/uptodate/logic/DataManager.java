@@ -6,10 +6,8 @@ import uptodate.saveload.LoadSaveHelper;
 
 public class DataManager {
 	private ArrayList<SaveEntry> saveList;
-	//private String fileName = "B:\\Documents\\SourceTree\\Java\\2048UpToDate\\src\\resources\\data.txt";
-	private String fileName = "\\resources\\data.txt";
+	private String fileName = "resources\\data.txt";
 
-			//"2048UpToDate/src/resources/data.txt";
 
 ;
 	
@@ -30,6 +28,10 @@ public class DataManager {
 			}
 		}
 		return temp;
+	}
+	
+	public ArrayList<SaveEntry> getSet(){
+		return saveList;
 	}
 	
 	public void saveGame(SaveEntry newElement){

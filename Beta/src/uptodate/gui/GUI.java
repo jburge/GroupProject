@@ -4,13 +4,6 @@ import javax.swing.JPanel;
 
 
 
-
-
-
-
-
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -28,6 +21,7 @@ import uptodate.color.*;
 import uptodate.logic.*;
 import uptodate.popups.MenuPanel;
 import uptodate.popups.PostGamePanel;
+import uptodate.popups.ViewSelectionPanel;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -46,6 +40,8 @@ public class GUI extends JPanel {
 	
 	private MenuPanel gameMenu;
 	private PostGamePanel gamePost;
+	private ViewSelectionPanel gameResults;
+	
 
 	private int windowWidth;
 	private int windowHeight;
@@ -80,7 +76,11 @@ public class GUI extends JPanel {
 		gamePost = new PostGamePanel(windowWidth, windowHeight);
 		createPostGameFunctions();
 		add(gamePost);
-				
+		
+		gameResults = new ViewSelectionPanel(windowWidth, windowHeight, currentSides, currentTime);
+		createViewFunctions();
+		add(gameResults);
+		
 		gameManager = new GenericGameLogic(currentSides);
 		
 		addKeyListener(new KeyAdapter() {
@@ -91,8 +91,7 @@ public class GUI extends JPanel {
 				gameOver = gameManager.checkState(e);
 				if(gameOver){
 					displayPost();
-					gameManager.saveGame("temp");
-					gameManager.newGame(currentSides, currentTime, gameColor);
+					//displayPrompt();
 				}
 				repaint();
 				
@@ -119,6 +118,9 @@ public class GUI extends JPanel {
 				case "Blue":
 					gameColor = new ColorAlt1();
 					break;
+				case "---":
+					gameColor = new ColorAlt2();
+					break;
 				}
 				gameManager.changeColor(gameColor);
 			}
@@ -143,7 +145,7 @@ public class GUI extends JPanel {
 		gameMenu.btnStartNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeMenu();
-				gameManager.saveGame("temp");
+				displayPost();
 				gameManager.newGame(newSides, newTime, gameColor);
 				currentSides = newSides;
 				currentTime = newTime;
@@ -155,6 +157,8 @@ public class GUI extends JPanel {
 		
 		gameMenu.btnResume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				gameMenu.comboSizeInput.setSelectedItem(String.valueOf(currentSides));
+				gameMenu.comboTimeInput.setSelectedItem(String.valueOf(currentTime));
 				removeMenu();
 				repaint();
 			}
@@ -162,13 +166,32 @@ public class GUI extends JPanel {
 	}
 	
 	private void createPostGameFunctions(){
+		gamePost.btnDisplay.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				displayResults();
+			}
+		});
+		
 		gamePost.btnSubmit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				removePost();
+				removePost(true);
+			}
+		});
+		gamePost.btnSkip.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				removePost(false);
 			}
 		});
 	}
 	
+	private void createViewFunctions(){
+		gameResults.btnReturn.addActionListener( new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				removeResults();
+			}	
+		});
+	}
 	private void detectInput(KeyEvent e){
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_ESCAPE:
@@ -208,10 +231,21 @@ public class GUI extends JPanel {
 		gamePost.makeVisible();
 	}
 	
-	private void removePost(){
-		gameManager.saveGame(gamePost.textUsernameInput.getText());
+	private void removePost(boolean save){
+		if(save)
+			gameManager.saveGame(gamePost.textUsernameInput.getText());
 		gamePost.resetValues();
 		gamePost.makeInvisible();
+		
+	}
+
+	private void displayResults(){
+		gameResults.setArray(gameManager.getFullDataSet());
+		gameResults.makeVisible();
+	}
+	
+	private void removeResults(){
+		gameResults.makeInvisible();
 	}
 
 	private void resizeWindow(){
@@ -236,6 +270,7 @@ public class GUI extends JPanel {
 				drawTile(g2, gameManager.getTile(x + y * currentSides), x, y);
 			}
 		}
+		g.setColor(gameColor.getForeground(0));
 		GraphicsManager.printScore(g2, gameManager.getScore(), windowWidth, windowHeight);
 		
 		GraphicsManager.checkGameStatus(g2, gameOver, gameManager.getWin(), windowWidth, windowHeight);

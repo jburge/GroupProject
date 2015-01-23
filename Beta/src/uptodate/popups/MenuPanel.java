@@ -37,17 +37,14 @@ public class MenuPanel extends PopupPanel{
 		lblColorway = new JLabel("Color Way:");
 		this.add(lblColorway);
 		comboColorInput = new JComboBox();
-		comboColorInput.addItem("Default");
-		comboColorInput.addItem("Blue");
+		comboColorInput = ComboBoxSeed.seedColor(comboColorInput);
 		this.add(comboColorInput);
 		
 		lblBoardSize = new JLabel("Board Size:");
 		this.add(lblBoardSize);
 		
 		comboSizeInput = new JComboBox();
-		comboSizeInput.addItem("3");
-		comboSizeInput.addItem("4");
-		comboSizeInput.addItem("5");
+		comboSizeInput = ComboBoxSeed.seedSize(comboSizeInput);
 		comboSizeInput.setSelectedItem("4");
 		this.add(comboSizeInput);
 		

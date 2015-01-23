@@ -17,7 +17,9 @@ public class PostGamePanel extends PopupPanel {
 	private JLabel lblUser;
 	
 	public JTextField textUsernameInput;
+	public JButton btnDisplay;
 	public JButton btnSubmit;
+	public JButton btnSkip;
 
 	public PostGamePanel(int windowWidth, int windowHeight) {
 		super(windowWidth, windowHeight);
@@ -41,9 +43,15 @@ public class PostGamePanel extends PopupPanel {
 
 		textUsernameInput = new JTextField();
 		this.add(textUsernameInput);
+		
+		btnDisplay = new JButton("View Standings");
+		this.add(btnDisplay);
 
 		btnSubmit = new JButton("Submit");
 		this.add(btnSubmit);
+		
+		btnSkip = new JButton("Skip");
+		this.add(btnSkip);
 
 		resetBounds(windowWidth, windowHeight);
 		setVisible(false);
@@ -71,19 +79,21 @@ public class PostGamePanel extends PopupPanel {
 		this.setBounds(menuWidthBuffer, menuHeightBuffer - 25, menuWidth,
 				menuHeight);
 
-		int heightUnit = menuHeight / 10;
-		int buffer = menuHeight /16;
+		int heightUnit = menuHeight / 7;
+		int buffer = menuHeight / 16;
 		int lblWidth = menuWidth - buffer * 2;
-		int fieldSize = heightUnit * 2 - buffer * 2;
+		int fieldSize = heightUnit - buffer;
 
-		int scoreHeight = heightUnit * 2;
-		int highHeight = scoreHeight + heightUnit * 2;
-		int userHeight = highHeight + heightUnit * 2;
-		int submitHeight = userHeight + heightUnit * 2;
+		int scoreHeight = heightUnit + buffer;
+		int highHeight = scoreHeight + heightUnit - buffer;
+		int userHeight = highHeight + heightUnit;
+		int displayHeight = userHeight + heightUnit;
+		int submitHeight = displayHeight + heightUnit;
+		int skipHeight = submitHeight + heightUnit;
 
 		int txtWidth = menuWidth;
 
-		lblGameOver.setBounds(0, 0, menuWidth, heightUnit * 2);
+		lblGameOver.setBounds(0, 0, menuWidth, heightUnit);
 
 		lblScore.setBounds(buffer, scoreHeight, lblWidth, fieldSize);
 
@@ -92,9 +102,13 @@ public class PostGamePanel extends PopupPanel {
 		lblUser.setBounds(buffer, userHeight, txtWidth / 2, 25);
 		textUsernameInput.setBounds(menuWidth / 2 + 10, userHeight,
 				menuWidth / 2 - 30, fieldSize);
+		
+		btnDisplay.setBounds(menuWidth / 4, displayHeight, menuWidth / 2, fieldSize);
 
 		btnSubmit.setBounds(menuWidth / 6, submitHeight, menuWidth / 6 * 4,
-				heightUnit * 2 - buffer );
+				heightUnit - buffer / 2);
+		
+		btnSkip.setBounds(menuWidth / 4, skipHeight, menuWidth / 2, fieldSize);
 
 	}
 }
