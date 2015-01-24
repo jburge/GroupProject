@@ -89,6 +89,7 @@ public class GenericGameLogic {
 		myScore = 0;
 		highestTile = 0;
 		myWin = false;
+		pause = false;
 		myTiles = new Tile[sideLength * sideLength];
 		for (int i = 0; i < myTiles.length; i++) {
 			myTiles[i] = new Tile(currentColor);
@@ -128,22 +129,24 @@ public class GenericGameLogic {
 	// dont know what to pass yet
 	// might need return as well
 	public boolean checkState(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_ESCAPE:
-			resetGame();
-			break;
-		case KeyEvent.VK_LEFT:
-			left();
-			break;
-		case KeyEvent.VK_RIGHT:
-			right();
-			break;
-		case KeyEvent.VK_DOWN:
-			down();
-			break;
-		case KeyEvent.VK_UP:
-			up();
-			break;
+		if(!pause){
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_ESCAPE:
+				resetGame();
+				break;
+			case KeyEvent.VK_LEFT:
+				left();
+				break;
+			case KeyEvent.VK_RIGHT:
+				right();
+				break;
+			case KeyEvent.VK_DOWN:
+				down();
+				break;
+			case KeyEvent.VK_UP:
+				up();
+				break;
+			}
 		}
 		if(myWin){
 			return true;

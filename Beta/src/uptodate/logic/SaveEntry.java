@@ -18,7 +18,7 @@ public class SaveEntry {
 	
 	@Override
 	public String toString(){
-		return user + ":\t" + highestTile  + "\t" + score;
+		return user + ":     " + highestTile  + "     " + score;
 	}
 	
 	public int getSize(){

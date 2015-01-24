@@ -56,6 +56,7 @@ public class ViewSelectionPanel extends PopupPanel{
 		this.add(selectSize);
 		
 		lblTimeLimit = new JLabel("Time Limit:");
+		this.add(lblTimeLimit);
 		selectTime = new JComboBox();
 		selectTime.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -68,10 +69,6 @@ public class ViewSelectionPanel extends PopupPanel{
 			}
 		});
 		selectTime = ComboBoxSeed.seedTime(selectTime);
-		this.add(lblTimeLimit);
-		
-		selectTime = new JComboBox();
-		selectTime.addItem("No Limit");
 		this.add(selectTime);
 		
 		textDisplay = new JTextArea();
@@ -81,11 +78,11 @@ public class ViewSelectionPanel extends PopupPanel{
 		btnReturn = new JButton("Return to Menu");
 		this.add(btnReturn);
 	
-				resetBounds(windowWidth, windowHeight);
+		resetBounds(windowWidth, windowHeight);
 		this.setVisible(false);
 	}
 	
-	private void resetBounds(int windowWidth, int windowHeight){
+	public void resetBounds(int windowWidth, int windowHeight){
 		int menuWidthBuffer = windowWidth / 9;
 		int menuHeightBuffer = windowHeight / 9;
 		int menuWidth = windowWidth - menuWidthBuffer * 2;

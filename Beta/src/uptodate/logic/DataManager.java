@@ -6,7 +6,7 @@ import uptodate.saveload.LoadSaveHelper;
 
 public class DataManager {
 	private ArrayList<SaveEntry> saveList;
-	private String fileName = "resources\\data.txt";
+	private String fileName = "src/resources/data.txt";
 
 
 ;
