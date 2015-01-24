@@ -1,6 +1,7 @@
 package uptodate.logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import uptodate.saveload.LoadSaveHelper;
 
@@ -36,5 +37,6 @@ public class DataManager {
 	
 	public void saveGame(SaveEntry newElement){
 		saveList.add(newElement);
+		Collections.sort(saveList, SaveEntry.scoreComparator);
 	}
 }

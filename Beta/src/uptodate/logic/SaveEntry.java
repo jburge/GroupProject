@@ -1,5 +1,7 @@
 package uptodate.logic;
 
+import java.util.Comparator;
+
 public class SaveEntry {
 	
 	private String user;
@@ -25,6 +27,10 @@ public class SaveEntry {
 		return boardSize;
 	}
 	
+	public int getScore(){
+		return score;
+	}
+	
 	public int getTimeLimit(){
 		return timeLimit;
 	}
@@ -32,4 +38,14 @@ public class SaveEntry {
 	public String save(){
 		return user + "|" + boardSize + "|" + highestTile + "|" + score + "|" + timeLimit;
 	}
+	
+	public static Comparator<SaveEntry> scoreComparator = new Comparator<SaveEntry>(){
+		public int compare(SaveEntry o1, SaveEntry o2) {
+			if(o1.getScore()> o2.getScore())
+				return -1;
+			else
+				return 1;
+		}
+		
+	};
 }

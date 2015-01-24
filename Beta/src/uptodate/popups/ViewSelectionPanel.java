@@ -1,5 +1,6 @@
 package uptodate.popups;
 
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class ViewSelectionPanel extends PopupPanel{
 	private JLabel lblTimeLimit;
 	private JComboBox selectSize;
 	private JComboBox selectTime;
+	private ScrollPane scrollArea;
 	private JTextArea textDisplay;
 	public JButton btnReturn; 
 
@@ -71,8 +73,11 @@ public class ViewSelectionPanel extends PopupPanel{
 		selectTime = ComboBoxSeed.seedTime(selectTime);
 		this.add(selectTime);
 		
+		scrollArea = new ScrollPane();
+		this.add(scrollArea);
+		
 		textDisplay = new JTextArea();
-		this.add(textDisplay);
+		scrollArea.add(textDisplay);
 		
 		
 		btnReturn = new JButton("Return to Menu");
@@ -112,7 +117,7 @@ public class ViewSelectionPanel extends PopupPanel{
 		lblTimeLimit.setBounds(40, timeHeight,txtWidth, 25);
 		selectTime.setBounds(menuWidth / 2 + 10, timeHeight, menuWidth / 2 - 30, fieldSize);
 		
-		textDisplay.setBounds(buffer, scrollViewHeight,menuWidth - buffer * 2, heightUnit * 3 - buffer);
+		scrollArea.setBounds(buffer, scrollViewHeight,menuWidth - buffer * 2, heightUnit * 3 - buffer);
 		
 		btnReturn.setBounds(menuWidth / 4, returnHeight, menuWidth / 2 , fieldSize);
 	}
