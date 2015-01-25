@@ -11,5 +11,9 @@
 <fullyQualifiedTypeName name="uptodate.popups.ViewSelectionPanel"/>
 <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
 <fullyQualifiedTypeName name="javax.swing.JTextArea"/>
+<fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.awt.ScrollPane"/>
+<fullyQualifiedTypeName name="themes.colorways.FireRed"/>
+<fullyQualifiedTypeName name="themes.colorways.ColorMod"/>
 </qualifiedTypeNameHistroy>

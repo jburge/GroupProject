@@ -13,6 +13,7 @@ public class ComboBoxSeed {
 	public static JComboBox seedColor(JComboBox myBox){
 		myBox.addItem("Default");
 		myBox.addItem("Blue");
+		myBox.addItem("Modern");
 		myBox.addItem("---");
 		return myBox;
 	}

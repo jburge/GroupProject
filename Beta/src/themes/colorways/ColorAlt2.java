@@ -43,6 +43,8 @@ public class ColorAlt2 extends ColorSet{
 	public Color getWindowColor(){
 		return new Color(0xE3E3C6);
 	}
-
+	public Color getText(){
+		return new Color(0xb2cddf);
+	}
 
 }

@@ -13,4 +13,5 @@ abstract public class ColorSet {
 	
 	public abstract Color getWindowColor();
 
+	public abstract Color getText();
 }

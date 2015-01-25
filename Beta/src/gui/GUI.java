@@ -24,6 +24,7 @@ import themes.*;
 import themes.colorways.ColorAlt1;
 import themes.colorways.ColorAlt2;
 import themes.colorways.ColorDefault;
+import themes.colorways.ColorMod;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -122,6 +123,9 @@ public class GUI extends JPanel {
 				case "Blue":
 					gameColor = new ColorAlt1();
 					break;
+				case "Modern":
+					gameColor = new ColorMod();
+					break;
 				case "---":
 					gameColor = new ColorAlt2();
 					break;
@@ -177,7 +181,10 @@ public class GUI extends JPanel {
 
 		gamePost.btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				postSave(true);
+				if(gamePost.textUsernameInput.getText().length() != 0)
+					postSave(true);
+				else
+					postSave(false);
 			}
 		});
 		gamePost.btnSkip.addActionListener(new ActionListener() {
@@ -303,12 +310,12 @@ public class GUI extends JPanel {
 				drawTile(g2, gameManager.getTile(x + y * currentSides), x, y);
 			}
 		}
-		g.setColor(gameColor.getForeground(0));
+		g.setColor(gameColor.getText());
 		GraphicsManager.printScore(g2, gameManager.getScore(), windowWidth,
 				windowHeight);
 
-		GraphicsManager.checkGameStatus(g2, gameOver, gameManager.getWin(),
-				windowWidth, windowHeight);
+		//GraphicsManager.checkGameStatus(g2, gameOver, gameManager.getWin(),
+		//		windowWidth, windowHeight);
 	}
 
 	// couldn't figure out how to move this to the graphics manager because of

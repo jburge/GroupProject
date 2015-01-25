@@ -15,7 +15,7 @@ import themes.colorways.ColorDefault;
 public class GenericGameLogic {
 	private int sideLength;
 	private Tile[] myTiles;
-	private ColorSet currentColor;
+	private ColorSet currentColor = new ColorDefault();
 	
 	private DataManager dataManager;
 
@@ -30,7 +30,9 @@ public class GenericGameLogic {
 	}
 	
 	public GenericGameLogic(int length){
-		this(length, new ColorDefault());
+		dataManager = new DataManager();
+		sideLength = length;
+		resetGame();
 	}
 	
 	public GenericGameLogic(int length, ColorSet color){

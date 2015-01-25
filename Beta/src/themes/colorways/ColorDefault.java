@@ -44,6 +44,10 @@ public class ColorDefault extends ColorSet{
 	public Color getWindowColor(){
 		return new Color(0xbbada0);
 	}
+	
+	public Color getText(){
+		return new Color(0x776e65);
+	}
 
 }
 

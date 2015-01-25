@@ -32,7 +32,7 @@ public class GraphicsManager {
 		g.drawString("Score: " + score, (windowWidth / 2) + 30, windowHeight - 35);
 	}
 	
-	public static void checkGameStatus(Graphics2D g, boolean gameEnd, boolean win, int windowWidth, int windowHeight){
+/*	public static void checkGameStatus(Graphics2D g, boolean gameEnd, boolean win, int windowWidth, int windowHeight){
 		if (gameEnd) {
 			g.setColor(new Color(255, 255, 255, 30));
 			g.fillRect(0, 0, windowWidth, windowHeight);
@@ -50,7 +50,7 @@ public class GraphicsManager {
 			g.setColor(new Color(128, 128, 128, 128));
 			g.drawString("Press ESC to play again", 40, windowHeight - 30);
 		}
-	}
+	}*/
 	
 	public static int offsetCoors(int arg) {
 		return arg * (TILES_MARGIN + TILE_SIZE) + TILES_MARGIN;

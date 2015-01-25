@@ -43,5 +43,9 @@ public class ColorAlt1 extends ColorSet{
 	public Color getWindowColor(){
 		return new Color(0x99bdd5);
 	}
+	
+	public Color getText(){
+		return new Color(0xb2cddf);
+	}
 
 }
