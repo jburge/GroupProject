@@ -7,21 +7,23 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import uptodate.logic.GenericGameLogic;
 import uptodate.logic.Tile;
 
 public class GraphicsManager {
 	public static final String FONT_NAME = "Arial";
 	public static final int TILE_SIZE = 64;
 	public static final int TILES_MARGIN = 16;
-	
 	public static Graphics2D initializeGraphics(Graphics oneDG){
 		Graphics2D g = ((Graphics2D) oneDG);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL,
 				RenderingHints.VALUE_STROKE_NORMALIZE);
+		
 		return g;
 	}
 
@@ -32,8 +34,33 @@ public class GraphicsManager {
 		g.drawString("Score: " + score, (windowWidth / 2) + 30, windowHeight - 35);
 	}
 	
+<<<<<<< Updated upstream
 	public static void checkGameStatus(Graphics2D g, boolean gameEnd, boolean win, int windowWidth, int windowHeight){
 		if (gameEnd) {
+=======
+	public static void printTime(Graphics2D g,int time,int windowWidth,int windowHeight){
+		g.setFont(new Font(FONT_NAME, Font.PLAIN, 18));
+		g.drawString("Time: " + time, (windowWidth / 2)-100 , windowHeight - 35);
+	}
+	
+	public static void checkGameStatus(Graphics2D g, boolean win, boolean lose, int windowWidth, int windowHeight,int time){
+		System.out.println("currentTime: "+time);
+		if(time==0){
+			g.setColor(new Color(255, 255, 255, 30));
+			g.fillRect(0, 0, windowWidth, windowHeight);
+			g.setColor(new Color(78, 139, 202));
+			g.setFont(new Font(FONT_NAME, Font.BOLD, 48));
+			g.drawString("Game over!", windowWidth / 2 - 120, windowHeight / 2 - 100);
+			g.drawString("You lose!", windowWidth / 2 - 106, windowHeight / 2 - 50);
+			g.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
+			g.setColor(new Color(128, 128, 128, 128));
+			g.drawString("Press ESC to play again", 40, windowHeight - 30);
+			GenericGameLogic tmp=new GenericGameLogic();
+			tmp.myLose=true;
+			System.exit(0);
+		}
+		if (win || lose) {
+>>>>>>> Stashed changes
 			g.setColor(new Color(255, 255, 255, 30));
 			g.fillRect(0, 0, windowWidth, windowHeight);
 			g.setColor(new Color(78, 139, 202));

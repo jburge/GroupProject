@@ -1,5 +1,6 @@
 package uptodate.gui;
 
+import javax.naming.TimeLimitExceededException;
 import javax.swing.JPanel;
 
 
@@ -11,10 +12,12 @@ import javax.swing.JPanel;
 
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -24,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import uptodate.color.*;
+import uptodate.gui.*;
 import uptodate.logic.*;
 import uptodate.popups.MenuPanel;
 
@@ -33,10 +37,12 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class GUI extends JPanel {
+public class GUI extends JPanel implements Runnable{
 	private static JFrame game;
 	
 	private JPanel panelPost;
@@ -54,8 +60,8 @@ public class GUI extends JPanel {
 	
 	private MenuPanel gameMenu;
 
-	private int windowWidth;
-	private int windowHeight;
+	public int windowWidth;
+	public int windowHeight;
 	
 	private GenericGameLogic gameManager;
 	private int defaultSideInput = 4;
@@ -69,6 +75,12 @@ public class GUI extends JPanel {
 	private int newTime;
 	private ColorSet gameColor = new ColorDefault();
 	
+    public time tt=null;
+    private Thread playerTread;
+    private String s;
+    public int playerTime=100;
+    private String playerTimeString;
+	
 
 	/**
 	 * Create the panel.
@@ -81,11 +93,16 @@ public class GUI extends JPanel {
 		windowWidth = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 1);
 		windowHeight = GraphicsManager.TILE_SIZE * currentSides + GraphicsManager.TILES_MARGIN * (currentSides + 5);
 		
+<<<<<<< Updated upstream
 		gameMenu = new MenuPanel(windowWidth, windowHeight);
 		createMenuFunctions();
 		add(gameMenu);
 		
 		createPostGamePanel();
+=======
+		createMenuPanel();
+		playerTread=new Thread(this);
+>>>>>>> Stashed changes
 		
 		gameManager = new GenericGameLogic(currentSides);
 		
@@ -140,9 +157,29 @@ public class GUI extends JPanel {
 				}
 			}
 		});
+<<<<<<< Updated upstream
+=======
+		comboSizeInput.addItem("3");
+		comboSizeInput.addItem("4");
+		comboSizeInput.addItem("5");
+		comboSizeInput.setSelectedItem("4");
+		panelMenu.add(comboSizeInput);
+		
+		lblTimeLimit = new JLabel("Time Limit:");
+		panelMenu.add(lblTimeLimit);
+		
+		comboTimeInput = new JComboBox();
+		comboTimeInput.addItem("10");
+		comboTimeInput.addItem("20");
+		panelMenu.add(comboTimeInput);
+>>>>>>> Stashed changes
 		
 		gameMenu.btnStartNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				playerTread.start();
+				playerTimeString=comboTimeInput.getSelectedItem().toString();
+				System.out.println("setTime:"+playerTimeString);
+				playerTime=Integer.parseInt(playerTimeString);
 				removeMenu();
 				gameManager.saveGame("temp");
 				gameManager.newGame(newSides, newTime, gameColor);
@@ -151,6 +188,7 @@ public class GUI extends JPanel {
 				resizeWindow();
 				gameMenu.resetBounds(windowWidth, windowHeight);
 				repaint();
+				
 			}
 		});
 		
@@ -218,7 +256,6 @@ public class GUI extends JPanel {
 		game.setSize( windowWidth, windowHeight);
 	}
 	
-	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(gameManager.getColorSet().getWindowColor());
@@ -234,8 +271,13 @@ public class GUI extends JPanel {
 			}
 		}
 		GraphicsManager.printScore(g2, gameManager.getScore(), windowWidth, windowHeight);
+<<<<<<< Updated upstream
 		
 		GraphicsManager.checkGameStatus(g2, gameOver, gameManager.getWin(), windowWidth, windowHeight);
+=======
+		GraphicsManager.printTime(g2, playerTime, windowWidth, windowHeight);
+		GraphicsManager.checkGameStatus(g2, gameManager.getWin(), gameManager.getLose(), windowWidth, windowHeight,playerTime);
+>>>>>>> Stashed changes
 	}
 
 	//couldn't figure out how to move this to the graphics manager because of the get font metrics line
@@ -265,16 +307,26 @@ public class GUI extends JPanel {
 
 	}
 
-
+	public void run(){
+		while (true){
+			playerTime--;
+        try {
+            	Thread.sleep(1000);
+        	} catch (InterruptedException e) {
+        		e.printStackTrace();
+        	}
+        this.repaint();
+        //System.exit(0);
+    }
+	}
 	public static void main(String[] args) {
 		game = new JFrame();
 		game.setTitle("2048 Game");
 		game.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		game.setSize(340, 400);
 		game.setResizable(false);
-
+		
 		game.getContentPane().add(new GUI());
-
 		game.setLocationRelativeTo(null);
 		game.setVisible(true);
 	}
