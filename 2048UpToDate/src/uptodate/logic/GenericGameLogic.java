@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import uptodate.color.*;
-import uptodate.gui.GUI;
 
 
 public class GenericGameLogic {
@@ -18,10 +17,6 @@ public class GenericGameLogic {
 	private DataManager dataManager;
 
 	boolean myWin = false;
-<<<<<<< Updated upstream
-=======
-	public boolean myLose = false;
->>>>>>> Stashed changes
 	boolean pause = false;
 	int myScore = 0;
 	int highestTile = 0;
@@ -148,15 +143,10 @@ public class GenericGameLogic {
 		if (!canMove()) {
 			return true;
 		}
-<<<<<<< Updated upstream
 		return false;
-=======
-
-		// resetGame();
->>>>>>> Stashed changes
 	}
 
-	public boolean canMove() {
+	boolean canMove() {
 		if (!isFull()) {
 			return true;
 		}
