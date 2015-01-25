@@ -34,10 +34,6 @@ public class GraphicsManager {
 		g.drawString("Score: " + score, (windowWidth / 2) + 30, windowHeight - 35);
 	}
 	
-<<<<<<< Updated upstream
-	public static void checkGameStatus(Graphics2D g, boolean gameEnd, boolean win, int windowWidth, int windowHeight){
-		if (gameEnd) {
-=======
 	public static void printTime(Graphics2D g,int time,int windowWidth,int windowHeight){
 		g.setFont(new Font(FONT_NAME, Font.PLAIN, 18));
 		g.drawString("Time: " + time, (windowWidth / 2)-100 , windowHeight - 35);
@@ -60,7 +56,6 @@ public class GraphicsManager {
 			System.exit(0);
 		}
 		if (win || lose) {
->>>>>>> Stashed changes
 			g.setColor(new Color(255, 255, 255, 30));
 			g.fillRect(0, 0, windowWidth, windowHeight);
 			g.setColor(new Color(78, 139, 202));
@@ -68,7 +63,7 @@ public class GraphicsManager {
 			if (win) {
 				g.drawString("You won!", windowWidth / 2 - 102, windowHeight / 2 - 50);
 			}
-			else {
+			else if (lose) {
 				g.drawString("Game over!", windowWidth / 2 - 120, windowHeight / 2 - 100);
 				g.drawString("You lose!", windowWidth / 2 - 106, windowHeight / 2 - 50);
 			}

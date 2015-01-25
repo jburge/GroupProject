@@ -14,32 +14,23 @@ public class GenericGameLogic {
 	private int sideLength;
 	private Tile[] myTiles;
 	private ColorSet currentColor;
-	
-	private DataManager dataManager;
 
 	boolean myWin = false;
-<<<<<<< Updated upstream
-=======
 	public boolean myLose = false;
->>>>>>> Stashed changes
 	boolean pause = false;
 	int myScore = 0;
-	int highestTile = 0;
-	int timeLimit = 0;
 
 	public GenericGameLogic() {
 		this(4);
 	}
 	
 	public GenericGameLogic(int length){
-		dataManager = new DataManager();
 		currentColor = (ColorSet) new ColorAlt2();
 		sideLength = length;
 		resetGame();
 	}
 	
 	public GenericGameLogic(int length, ColorSet color){
-		dataManager = new DataManager();
 		currentColor = color;
 		sideLength = length;
 		resetGame();
@@ -48,14 +39,17 @@ public class GenericGameLogic {
 	public boolean getWin() {
 		return myWin;
 	}
+
+	public boolean getLose() {
+		return myLose;
+	}
 	
 	public ColorSet getColorSet(){
 		return currentColor;
 	}
 	
 	// reassigns Tiles with new Color
-	public void changeColor(ColorSet change){
-		currentColor = change;
+	private void changeColor(){
 		for(Tile t: myTiles){
 			t.changeTileColor(currentColor);
 		}
@@ -86,6 +80,7 @@ public class GenericGameLogic {
 	private void resetGame() {
 		myScore = 0;
 		myWin = false;
+		myLose = false;
 		myTiles = new Tile[sideLength * sideLength];
 		for (int i = 0; i < myTiles.length; i++) {
 			myTiles[i] = new Tile(currentColor);
@@ -116,44 +111,39 @@ public class GenericGameLogic {
 	private boolean isFull() {
 		return availableSpace().size() == 0;
 	}
-	
-	public void saveGame(String username){
-		dataManager.saveGame(new SaveEntry(username, sideLength, highestTile, myScore, timeLimit));
-		dataManager.saveData();
-	}
 
 	// dont know what to pass yet
 	// might need return as well
-	public boolean checkState(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_ESCAPE:
+	public void checkState(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			resetGame();
-			break;
-		case KeyEvent.VK_LEFT:
-			left();
-			break;
-		case KeyEvent.VK_RIGHT:
-			right();
-			break;
-		case KeyEvent.VK_DOWN:
-			down();
-			break;
-		case KeyEvent.VK_UP:
-			up();
-			break;
-		}
-		if(myWin){
-			return true;
 		}
 		if (!canMove()) {
-			return true;
+			myLose = true;
 		}
-<<<<<<< Updated upstream
-		return false;
-=======
+
+		if (!myWin && !myLose) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_LEFT:
+				left();
+				break;
+			case KeyEvent.VK_RIGHT:
+				right();
+				break;
+			case KeyEvent.VK_DOWN:
+				down();
+				break;
+			case KeyEvent.VK_UP:
+				up();
+				break;
+			}
+		}
+
+		if (!myWin && !canMove()) {
+			myLose = true;
+		}
 
 		// resetGame();
->>>>>>> Stashed changes
 	}
 
 	public boolean canMove() {
@@ -170,7 +160,6 @@ public class GenericGameLogic {
 				}
 			}
 		}
-
 		return false;
 	}
 
@@ -294,9 +283,6 @@ public class GenericGameLogic {
 			if (i < sideLength - 1 && oldLine[i].getValue() == oldLine[i + 1].getValue()) {
 				num *= 2;
 				myScore += num;
-				if(num > highestTile){
-					highestTile = num;
-				}
 				int ourTarget = 2048;
 				if (num == ourTarget) {
 					myWin = true;
