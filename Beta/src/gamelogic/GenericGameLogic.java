@@ -23,7 +23,7 @@ public class GenericGameLogic {
 	boolean pause = false;
 	int myScore = 0;
 	int highestTile = 0;
-	int timeLimit = 0;
+	int timeLimit;
 
 	public GenericGameLogic() {
 		this(4);
@@ -35,10 +35,11 @@ public class GenericGameLogic {
 		resetGame();
 	}
 	
-	public GenericGameLogic(int length, ColorSet color){
+	public GenericGameLogic(int length, ColorSet color, int time){
 		dataManager = new DataManager();
 		currentColor = color;
 		sideLength = length;
+		timeLimit = time;
 		resetGame();
 	}
 
@@ -68,6 +69,7 @@ public class GenericGameLogic {
 	public void newGame(int length, int time, ColorSet color){
 		sideLength = length;
 		currentColor = color;
+		timeLimit = time;
 		resetGame();
 	}
 

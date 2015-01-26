@@ -69,6 +69,7 @@ public class ViewSelectionPanel extends PopupPanel{
 			public void actionPerformed(ActionEvent e){
 				if ((String) selectTime.getSelectedItem() == "No Limit"){
 					selectedTime = 0;
+					getElementsToDisplay();
 					return;
 			}
 				selectedTime = Integer.valueOf((String) selectTime.getSelectedItem());
@@ -139,12 +140,9 @@ public class ViewSelectionPanel extends PopupPanel{
 		getElementsToDisplay();
 	}
 	
-	public void setInitialParameters(int size, int time){
-		selectedSize = size;
-		selectedTime = time;
-		
-		selectSize.setSelectedIndex(size - 3);
-		selectTime.setSelectedIndex(0);
+	public void setInitialParameters(int sizeIndex, int timeIndex){
+		selectSize.setSelectedIndex(sizeIndex);
+		selectTime.setSelectedIndex(timeIndex);
 	}
 
 

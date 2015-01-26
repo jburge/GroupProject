@@ -19,6 +19,10 @@ public class ComboBoxSeed {
 	}
 	public static JComboBox seedTime(JComboBox myBox){
 		myBox.addItem("No Limit");
+		myBox.addItem("2");
+		myBox.addItem("5");
+		myBox.addItem("15");
+		myBox.addItem("30");
 		return myBox;
 	}
 }

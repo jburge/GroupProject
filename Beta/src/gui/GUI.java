@@ -149,6 +149,28 @@ public class GUI extends JPanel {
 				}
 			}
 		});
+		
+		gameMenu.comboTimeInput.addActionListener(new ActionListener()  {
+			public void actionPerformed(ActionEvent arg0) {
+				switch (gameMenu.comboTimeInput.getSelectedItem().toString()) {
+				case "No Limit":
+					newTime = 0;
+					break;
+				case "2":
+					newTime = 2;
+					break;
+				case "5":
+					newTime = 5;
+					break;
+				case "15":
+					newTime = 15;
+					break;
+				case "30":
+					newTime = 30;
+					break;
+				}
+			}
+		});
 
 		gameMenu.btnStartNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -268,7 +290,7 @@ public class GUI extends JPanel {
 
 	private void displayResults() {
 		gameResults.setArray(gameManager.getFullDataSet());
-		gameResults.setInitialParameters(currentSides, currentTime);
+		gameResults.setInitialParameters(gameMenu.comboSizeInput.getSelectedIndex(), gameMenu.comboTimeInput.getSelectedIndex());
 		gameResults.makeVisible();
 		gamePost.makeInvisible();
 	}

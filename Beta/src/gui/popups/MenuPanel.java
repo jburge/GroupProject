@@ -51,7 +51,7 @@ public class MenuPanel extends PopupPanel{
 		lblTimeLimit = new JLabel("Time Limit:");
 		this.add(lblTimeLimit);
 		comboTimeInput = new JComboBox();
-		comboTimeInput.addItem("No Limit");
+		ComboBoxSeed.seedTime(comboTimeInput);  
 		this.add(comboTimeInput);
 		
 		btnStartNewGame = new JButton("Start New Game");
