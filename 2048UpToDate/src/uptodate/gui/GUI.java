@@ -115,6 +115,7 @@ public class GUI extends JPanel implements Runnable{
 			//bring up menu
 			if(gameManager.isPaused()){
 				removeMenu();
+				
 			}
 			else{
 				displayMenu();
